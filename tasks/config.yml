@@ -1,0 +1,19 @@
+---
+
+- name: Config - watch files
+  template:
+    src=watch-files.json.j2
+    dest=/etc/logstash-forwarder/{{ logstash_from_play }}.json
+    owner={{ logstash_forwarder_user }}
+    group={{ logstash_forwarder_group }}
+    mode=0644
+  register: watch_files
+  notify: restart logstash-forwarder
+
+- name: config - notify to restart service 
+  command: /bin/true
+  tags:
+    - notify
+  notify: restart logstash-forwarder
+  when: watch_files|changed
+
