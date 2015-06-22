@@ -7,13 +7,12 @@
     owner={{ logstash_forwarder_user }}
     group={{ logstash_forwarder_group }}
     mode=0644
-  register: watch_files
   notify: restart logstash-forwarder
 
-- name: config - notify to restart service 
-  command: /bin/true
-  tags:
-    - notify
+- name: Config - remove watch files
+  file:
+    state=absent
+    path=/etc/logstash-forwarder/{{ logstash_from_play }}.json
+  with_items: "{{ logstash_forwarder_config_files_remove }}"
   notify: restart logstash-forwarder
-  when: watch_files|changed
 
