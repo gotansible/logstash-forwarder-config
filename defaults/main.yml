@@ -3,7 +3,7 @@ logstash_forwarder_user: logstash-forwarder
 logstash_forwarder_group: adm
 
 #logstash_from_play: 
-logstash_forwarder_files: []
+logstash_forwarder_config_files: []
 #  - paths:
 #      - /var/log/syslog
 #    fields:
