@@ -1,0 +1,4 @@
+---
+
+- name: restart logstash-forwarder
+  shell: sudo sv restart logstash-forwarder
